@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <form #postForm="ngForm" (ngSubmit)="onCreateTrade(postForm.value)">
+          <div class="form-group">
+            <label for="title">Enter Trade ID (10 Char)</label>
+            <input
+              type="text"
+              class="form-control"
+              id="tradeId"
+              required
+              ngModel
+              name="tradeId"
+            />
+          </div>
+          <div class="form-group">
+            <label for="content">Trade Recipent Address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recipient"
+              required
+              ngModel
+              name="recipient"
+            >
+          </div>
+          <div class="form-group">
+            <label for="content">Trade Amount</label>
+            <input
+              type="number"
+              class="form-control"
+              id="amount"
+              required
+              ngModel
+              name="amount"
+            >
+          </div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!postForm.valid"
+            submit>
+            Submit Trade
+          </button>
+          <span class="help-block" *ngIf="!txId && isfetching"> Submitting Trade Please Wait....</span>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+          <h3 class="text-success text-center" *ngIf="txId">Trade Submitted Succesfully!!!, Transaction ID for you Reference: {{txId}}</h3>
+          <h3 class="text-denger" *ngIf="!txId && error">SOmething Went Wrong, Please try Again.</h3>
+      </div>
+    </div>
+  </div>

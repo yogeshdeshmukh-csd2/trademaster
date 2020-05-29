@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <form #tradeForm="ngForm" (ngSubmit)="onFetchTrade(tradeForm.value)">
+          <div class="form-group">
+            <label for="title">Please Enter Trade ID:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="tradeId"
+              required
+              ngModel
+              name="tradeId"
+            />
+          </div>
+          
+          <button
+            class="btn btn-primary btn-block"
+            type="submit"
+            [disabled]="!tradeForm.valid">
+            Search
+          </button>
+        </form>
+        <hr>
+        <button
+            class="btn btn-primary btn-block"
+            type="button"
+            (click)="onLoadAll()">
+            Load All Trade
+          </button>
+      </div>
+    </div>
+    <hr />
+    <div class="row" *ngIf="tradeData && sender != '0x0000000000000000000000000000000000000000'">
+      <div class="col-md-12 text-center" style="border:1px"><h3 class="text-primary">Trade Details Found</h3>
+        <div class="row">
+          <div class="col-md-6 text-right text-primary" style="border:1px solid">Trade Amount</div>
+          <div class="col-md-6 text-left text-primary" style="border:1px solid">{{amount}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-right text-primary" style="border:1px solid">Sender Address</div>
+          <div class="col-md-6 text-left text-primary" style="border:1px solid">{{sender}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-right text-primary" style="border:1px solid">Recipient Address</div>
+          <div class="col-md-6 text-left text-primary" style="border:1px solid">{{recipient}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-right text-primary" style="border:1px solid">Trade Date</div>
+          <div class="col-md-6 text-left text-primary" style="border:1px solid">{{tradeDate}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-right text-primary" style="border:1px solid">Trade Status</div>
+          <div class="col-md-6 text-left text-primary" style="border:1px solid">{{tStatusMapping}}</div>
+        </div></div>
+    </div>
+    <div class="text-warning text-center" *ngIf="sender == '0x0000000000000000000000000000000000000000' && recipient =='0x0000000000000000000000000000000000000000'">
+      <h3>No Trade Found with Given TradeId</h3>
+    </div>
+    <div class="row">
+      <div class="col text-primary">
+        <ul class="list-group" *ngIf="tradeRes.length >= 1 && !isFetching">
+          <li class="list-group-item" *ngFor="let trade of tradeRes">
+            <h5>TradeId : {{ trade.tradeId }}</h5>
+            <h5>Sender : {{ trade.sender }}</h5>
+            <h5>Recipient : {{ trade.recipient }}</h5>
+            <h5>TradeDate : {{ trade.tradeDate }}</h5>
+            <h5>Amount : {{ trade.amount }}</h5>
+            <h5>TradeStatus : {{ trade.tradeStatus }}</h5>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
