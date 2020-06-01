@@ -1,0 +1,9 @@
+
+# To Start the express app:
+
+This project was build with [npm 6.14.*, node 14.3.*]
+
+## Development server
+
+Run command: npm install, to install all npm dependency packages.
+Run command: node app, Access to `http://localhost:3000/`<endpoints>.
